@@ -12,10 +12,9 @@ namespace Application.OrganizationStructure.Departments.Queries.GetDepartmentLis
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<DepartmentLookupDto, Department>()
-                .ForMember(departmentDto=>departmentDto.Id, opt=>opt.MapFrom(department=>department.Id))
-                .ForMember(departmentDto => departmentDto.Name, opt => opt.MapFrom(department => department.Name));
-
+            profile.CreateMap<Department, DepartmentLookupDto>()
+                .ForMember(dto => dto.Id, opt => opt.MapFrom(department => department.Id))
+                .ForMember(dto => dto.Name, opt => opt.MapFrom(department => department.Name));
         }
     }
 }
