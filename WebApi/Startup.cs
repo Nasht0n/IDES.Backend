@@ -7,6 +7,11 @@ using System.Reflection;
 using Application;
 using Application.Common.Mapping;
 using Application.Interfaces;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Persistence;
 using WebApi.Middleware;
 
@@ -26,9 +31,18 @@ namespace WebApi
                 config.AddProfile(new AssemblyMappingProfile(typeof(IDbContext).Assembly));
             });
 
+            services.TryAddSingleton<ISystemClock, SystemClock>();
             services.AddApplication();
             services.AddPersistence(Configuration);
             services.AddControllers();
+
+            services.AddMvc(opt =>
+            {
+                opt.EnableEndpointRouting = false;
+                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().RequireAuthenticatedUser()
+                    .Build();
+                opt.Filters.Add(new AuthorizeFilter(policy));
+            }).SetCompatibilityVersion(CompatibilityVersion.Latest);
 
             services.AddCors(options =>
             {
@@ -51,6 +65,9 @@ namespace WebApi
             app.UseCustomExceptionHandler();
 
             app.UseRouting();
+
+            app.UseAuthentication();
+
             app.UseHttpsRedirection();
             app.UseCors("AllowAll");
 

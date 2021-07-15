@@ -1,4 +1,5 @@
-﻿using Domain.Models.OrganizationStructure;
+﻿using Domain.Models.Identity;
+using Domain.Models.OrganizationStructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -14,6 +15,7 @@ namespace Persistence.EntityTypeConfigurations
             builder.Property(employee => employee.Position).IsRequired().HasMaxLength(250);
             builder.Property(employee => employee.Email).HasMaxLength(250);
             builder.Property(employee => employee.IsDeleted).IsRequired();
+
             builder.HasOne(employee => employee.Department)
                 .WithMany(department => department.Employees)
                 .HasForeignKey(employee=>employee.DepartmentId);

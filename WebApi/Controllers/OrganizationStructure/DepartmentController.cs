@@ -21,15 +21,15 @@ namespace WebApi.Controllers.OrganizationStructure
         public DepartmentController(IMapper mapper) => _mapper = mapper;
         
         [HttpGet]
-        public async Task<ActionResult<DepartmentListVm>> GetAll(bool isDeleted)
+        public async Task<ActionResult<DepartmentListVm>> GetAll([FromQuery] bool isDeleted)
         {
-            var query = new GetDepartmentListQuery() {IsDeleted = isDeleted};
+            var query = new GetDepartmentListQuery() {IsDeleted = isDeleted };
             var vm = await Mediator.Send(query);
             return Ok(vm);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<DepartmentDetailsVm>> Get(Guid id)
+        public async Task<ActionResult<DepartmentDetailsVm>> Get([FromQuery] Guid id)
         {
             var query = new GetDepartmentDetailsQuery()
             {
@@ -56,7 +56,7 @@ namespace WebApi.Controllers.OrganizationStructure
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(Guid id)
+        public async Task<IActionResult> Delete([FromQuery] Guid id)
         {
             var command = new DeleteDepartmentCommand()
             {
