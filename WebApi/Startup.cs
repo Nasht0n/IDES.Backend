@@ -32,7 +32,7 @@ namespace WebApi
             });
 
             services.TryAddSingleton<ISystemClock, SystemClock>();
-            services.AddApplication();
+            services.AddApplication(Configuration);
             services.AddPersistence(Configuration);
             services.AddControllers();
 

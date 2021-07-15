@@ -9,6 +9,7 @@ namespace Application.Identity.Users.Queries
     {
         public Guid Id { get; set; }
         public Guid EmployeeId { get; set; }
+        public string Token { get; set; }
 
         public void Mapping(Profile profile)
         {

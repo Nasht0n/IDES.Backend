@@ -3,6 +3,7 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Exceptions;
+using Application.Common.JWT;
 using Domain.Models.Identity;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -13,9 +14,10 @@ namespace Application.Identity.Users.Queries
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly IJwtGenerator _jwtGenerator;
 
-        public SignInUserQueryHandler(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager) =>
-            (_userManager, _signInManager) = (userManager, signInManager);
+        public SignInUserQueryHandler(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IJwtGenerator jwtGenerator) =>
+            (_userManager, _signInManager, _jwtGenerator) = (userManager, signInManager,jwtGenerator);
 
         public async Task<SignInUserDetailVm> Handle(SignInUserQuery request, CancellationToken cancellationToken)
         {
@@ -31,6 +33,7 @@ namespace Application.Identity.Users.Queries
                 return new SignInUserDetailVm()
                 {
                     Id = Guid.Parse(user.Id),
+                    Token = _jwtGenerator.CreateToken(user),
                     EmployeeId = user.EmployeeId
                 };
             }
