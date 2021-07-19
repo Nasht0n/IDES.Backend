@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Domain.Models.Documents.Casts;
 using Domain.Models.Identity;
 
 namespace Domain.Models.OrganizationStructure
@@ -14,5 +15,8 @@ namespace Domain.Models.OrganizationStructure
         
         public Department Department { get; set; }
         public ICollection<AppUser> Users { get; set; }
+
+        public IList<OrderCreator> Creators { get; set; }
+        public IList<OrderApprover> Approvers { get; set; }
     }
 }

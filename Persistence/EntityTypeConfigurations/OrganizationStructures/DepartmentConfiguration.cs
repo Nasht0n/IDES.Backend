@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Persistence.EntityTypeConfigurations
+namespace Persistence.EntityTypeConfigurations.OrganizationStructures
 {
     public class DepartmentConfiguration:IEntityTypeConfiguration<Department>
     {
