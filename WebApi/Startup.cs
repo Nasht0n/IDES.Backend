@@ -25,16 +25,16 @@ namespace WebApi
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.TryAddSingleton<ISystemClock, SystemClock>();
+            services.AddApplication(Configuration);
+            services.AddPersistence(Configuration);
+            services.AddControllers();
+
             services.AddAutoMapper(config =>
             {
                 config.AddProfile(new AssemblyMappingProfile(Assembly.GetExecutingAssembly()));
                 config.AddProfile(new AssemblyMappingProfile(typeof(IDbContext).Assembly));
             });
-
-            services.TryAddSingleton<ISystemClock, SystemClock>();
-            services.AddApplication(Configuration);
-            services.AddPersistence(Configuration);
-            services.AddControllers();
 
             services.AddMvc(opt =>
             {

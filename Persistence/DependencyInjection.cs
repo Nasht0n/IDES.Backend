@@ -11,9 +11,10 @@ namespace Persistence
     {
         public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = configuration["DbConnection"];
+            var connectionString = configuration.GetConnectionString("DbConnection");
+            
             services.AddDbContext<IdesDbContext>(opt =>
-            {
+            {                
                 opt.UseSqlServer(connectionString);
             });
 
@@ -32,7 +33,6 @@ namespace Persistence
             identityBuilder.AddEntityFrameworkStores<IdesDbContext>();
             identityBuilder.AddSignInManager<SignInManager<AppUser>>();
             
-
             services.AddScoped<IDbContext>(provider => provider.GetService<IdesDbContext>());
             return services;
         }
