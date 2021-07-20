@@ -20,4 +20,12 @@
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.11.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Documents\Attachments\OrderAttachments\Commands\CreateOrderAttachment\" />
+    <Folder Include="Documents\Attachments\OrderAttachments\Commands\DeleteOrderAttachment\" />
+    <Folder Include="Documents\Attachments\OrderAttachments\Commands\UpdateOrderAttachment\" />
+    <Folder Include="Documents\Attachments\OrderAttachments\Queries\GetOrderAttachmentList\" />
+    <Folder Include="Documents\Attachments\OrderAttachments\Queries\GetOrderAttachmentDetails\" />
+  </ItemGroup>
+
 </Project>

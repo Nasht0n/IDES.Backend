@@ -21,7 +21,7 @@ namespace Application.OrganizationStructure.Departments.Commands.DeleteDepartmen
                 throw new NotFoundException(nameof(Department), request.Id);
             }
 
-            _context.Departments.Remove(entity);
+            entity.IsDeleted = true;
             await _context.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;

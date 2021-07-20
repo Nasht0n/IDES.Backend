@@ -21,7 +21,7 @@ namespace Application.OrganizationStructure.Employees.Commands.DeleteEmployee
                 throw new NotFoundException(nameof(Employee), request.Id);
             }
 
-            _context.Employees.Remove(entity);
+            entity.IsDeleted = true;
             await _context.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;
