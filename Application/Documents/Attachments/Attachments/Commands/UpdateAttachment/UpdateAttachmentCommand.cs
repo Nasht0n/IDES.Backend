@@ -8,5 +8,6 @@ namespace Application.Documents.Attachments.Attachments.Commands.UpdateAttachmen
     {
         public Guid Id { get; set; }        
         public IFormFile File { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }
