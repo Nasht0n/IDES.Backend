@@ -14,7 +14,7 @@ namespace Application.Documents.Attachments.OrderAttachments.Queries.GetOrderAtt
         private readonly IDbContext _context;
         private readonly IMapper _mapper;
 
-        private GetOrderAttachmentListQueryHandler(IDbContext context, IMapper mapper)
+        public GetOrderAttachmentListQueryHandler(IDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

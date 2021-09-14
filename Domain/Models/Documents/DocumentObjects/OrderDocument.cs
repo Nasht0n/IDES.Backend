@@ -10,6 +10,7 @@ namespace Domain.Models.Documents.DocumentObjects
     {
         public Guid? IndexId { get; set; }
         public Guid? DateTimeId { get; set; }
+        
 
         public IList<OrderCreator> Creators { get; set; }
         public IList<OrderApprover> Approvers { get; set; }
